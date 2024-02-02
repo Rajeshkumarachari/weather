@@ -66,14 +66,19 @@ function App() {
   const [wind, setWind] = useState(0);
   const [cityNotFound, setCityNotFound] = useState(false);
   const [loading, setLoading] = useState(false);
-  let api_key = `f6321993eb65ee5d9513b630f0c720d3`;
+  let api_key = "ef689cc1acaab19e12a9f8a0a54ec6b5";
 
   const search = async () => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q={city name}&appid=${api_key} &units=Metric`;
+    setLoading(true);
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${text}&appid=${api_key}&units=Metric`;
     try {
+      let res = await fetch(url);
+      let data = await res.json();
+      console.log(data);
     } catch (error) {
       console.log("An error occurred", error.message);
     } finally {
+      setLoading(false);
     }
   };
   const handleCity = (e) => {
